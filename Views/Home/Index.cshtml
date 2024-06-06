@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="home-details text-center p-3">
+    <div data-aos="zoom-in" class="text-light fw-bold" style="font-size: 60px">susFaceGen</div>
+    <p data-aos="zoom-in" class="fs-5 text-white-50">
+        Realistic Composite Image Generator using Text-to-Image<br />
+        Generative AI to identify suspects.
+    </p>
+
+    <div data-aos="zoom-in" class="mt-4">
+        <a class="btn btn-primary btn-lg mx-1 fs-6 rounded-3" asp-area="" asp-controller="Statement" asp-action="GenerateImage">Generate Your Image <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        <a class="btn btn-outline-secondary btn-lg mx-1 fs-6 rounded-3" asp-area="" asp-controller="Statement" asp-action="Recents">Recents</a>
+    </div>
+</div>

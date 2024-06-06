@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Success";
+}}
+
+<div class="success rounded-2 p-3 px-5 shadow col-12 col-md-4 text-light border border-1 border-light">
+    <div class="text-center">
+        <i class="fa-regular fa-circle-check" style="font-size: 100px;"></i>
+    </div>
+    <h1 class="text-center">Success</h1>
+
+    <p class="text-center">Your image has been saved successfully.</p>
+    <hr />
+    <div class="text-center">
+        <form id="frmDownload" method="post" asp-action="Download">
+            <input name="url" value="@TempData["imgUrl"]" hidden />
+            <input id="filetype" name="filetype" value="" hidden />
+        </form>
+        
+        <div class="btn-group-lg" role="group" aria-label="downloadBtn">
+            <button type="button" class="btn btn-lg btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Download As
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="imgDownload dropdown-item" onclick="document.getElementById('filetype').value='jpg'; document.getElementById('frmDownload').submit()">JPEG</a></li>
+                <li><a class="imgDownload dropdown-item" onclick="document.getElementById('filetype').value='png'; document.getElementById('frmDownload').submit()">PNG</a></li>
+            </ul>
+        </div>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary mt-2"><i class="fa-solid fa-arrow-left me-1"></i>Back to Home</a>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(".imgDownload").click(function () {
+            setTimeout(function () {
+                $('#pageLoading').fadeOut();
+            }, 7000);
+        });
+    </script>  
+}

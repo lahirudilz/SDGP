@@ -1,0 +1,78 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Admin/_Admin_Layout.cshtml";
+}
+<div class="mt-4 p-3 bg-dark">
+    <div class=" float-start">
+        <div class="text-center">
+            <a class="btn btn-primary me-1" asp-action="UserList" asp-controller="Admin"><i class="fa-solid fa-arrow-left me-2"></i>Back to List</a>
+        </div>
+    </div>
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="row register mx-3">
+
+            <div class="col-md-6 mx-auto shadow bg-dark  p-3 rounded-3 mt-2 text-light">
+                <h1 class="text-light text-center mb-4">@ViewData["Title"] a user</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="row">
+                    <div class="form-group mb-3 col-md-6">
+                        <label class="form-label" asp-for="Input.FName">First Name</label>
+                        <input asp-for="Input.FName" class="form-control" autocomplete="first-name" aria-required="true" placeholder="John" />
+
+                        <span asp-validation-for="Input.FName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 col-md-6">
+                        <label class="form-label" asp-for="Input.LName">Last Name</label>
+                        <input asp-for="Input.LName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Doe" />
+
+                        <span asp-validation-for="Input.LName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group mb-3 col-md-6">
+                        <label class="form-label" asp-for="Input.JobId">Job Id</label>
+                        <input asp-for="Input.JobId" class="form-control" aria-required="true" placeholder="Doe" />
+
+                        <span asp-validation-for="Input.JobId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 col-md-6">
+                        <label class="form-label" asp-for="Input.JobPosition">Job Position</label>
+                        <input asp-for="Input.JobPosition" class="form-control" aria-required="true" placeholder="Doe" />
+
+                        <span asp-validation-for="Input.JobPosition" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group mb-3">
+                    <label class="form-label" asp-for="Input.Email">Email</label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" asp-for="Input.UserRole">User Role</label><br />
+                    <select class="form-select valid" id="Input_UserRole" name="Input.UserRole" aria-invalid="false">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                    @* <select class="form-select" asp-for="Input.UserRole" asp-items="@Model.UserRoleList"></select> *@
+                </div>
+
+                <div class="d-inline-flex mt-2 justify-content-center w-100">
+                    <div class="me-1"><button id="registerSubmit" type="submit" class="btn btn-lg btn-primary">Register</button></div>
+                    <div class="ms-1"><button id="resetSubmit" type="reset" class="btn btn-lg btn-secondary">Clear</button></div>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

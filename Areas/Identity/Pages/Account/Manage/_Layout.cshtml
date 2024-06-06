@@ -1,0 +1,38 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<div class="p-2 shadow bg-dark text-light rounded row mt-2">
+    <h1>Manage your account</h1>
+
+    <div>
+        <h2>Change your account settings</h2>
+        <hr />
+        <div class="row" style="min-height: 450px;">
+            <div class="col-md-3 border-end bg-dark shadow-lg">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @RenderSection("Scripts", required: false)
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            window.onload = function()
+            {
+                document.body.classList.add("admin-bg");
+            }
+        </script>
+    }
+</div>

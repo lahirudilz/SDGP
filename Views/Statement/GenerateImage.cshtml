@@ -1,0 +1,167 @@
+﻿@model GenerateImageVIewModel
+@{
+    ViewBag.Title = "Generate Image";
+    ViewData["IsGenerated"] = !Model.IsGenerated;
+    ViewData["CaseSubmit"] = Model.IsCaseSubmitted;
+    ViewData["GenerateSubmit"] = !Model.IsCaseSubmitted;
+}
+
+<div class="generate row rounded-2 position-relative">
+    <div class="position-absolute">
+       @if (TempData["msg"] != null)
+       {
+        <div id="alertASP" class="alert alert-@TempData["alertType"] alert-dismissible fade show text-center mx-auto col-md-5 col-12 z-3 mt-1">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+       }
+       
+        <div id="alertAjax" class="alert alert-warning alert-dismissible fade show text-center mx-auto col-md-5 col-12 z-3 mt-1" style="display: none;">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      
+    </div>
+    <div class="col-md-6 py-2">
+        <div class="overflow-auto" style="height: calc(100vh - 140px);">
+
+            <!-- Case Details Section -->
+            <div class="p-2">
+                <partial name="_CasePartial" model="@Model.Case" view-data="ViewData"/>
+            </div>
+
+            <!-- Statement Details Section -->
+            <div class="p-2">
+                <partial name="_StatementPartial" model="@Model.Statement" view-data="ViewData" />
+            </div>
+       </div>
+    </div>
+    
+    <!-- Image Displaying Section -->
+    <div class="col-md-6 image"> 
+        <div id="loading" class="position-absolute top-50 start-50 translate-middle z-3" style="display: none;">
+            <div class="spinner-grow text-light mb-4" role="status" style="height: 5rem; width: 5rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div class="p-5 d-md-none d-block">
+
+            <img src="@Model.ImageUrl" class="d-flex mx-auto img-fluid rounded-3 shadow imgGen" alt="Generated image will be appear here" />
+            
+            <div class="mx-auto text-center">
+                <button type="button" class="btn btn-lg btn-success mt-3 btnSave" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled @* disabled="@ViewData["IsGenerated"]" *@>
+                    Save Image<i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-5 result d-md-block d-none">
+            <img src="@Model.ImageUrl" class="d-flex mx-auto rounded-3 shadow imgGen" width="450" height="450" alt="Generated image will be appear here" />         
+            <div class="mx-auto text-center">
+                <button type="button" class="btn btn-lg btn-success mt-3 btnSave" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled @* disabled="@ViewData["IsGenerated"]" *@>
+                    Save Image<i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for save the image -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content text-light border ">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Are You Sure You Want to Save?</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="@Model.ImageUrl" class="d-flex mx-auto rounded-circle shadow p-2 bg-light imgGen" width="250" height="250" alt="Generated image will be appear here" />
+                </div>
+                <div class="modal-footer text-center justify-content-center border-0">
+                    <button type="button" onclick="saveStat()" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-title="Save the Generated Image"><i class="fa-solid fa-floppy-disk fs-1"></i></button>
+                    <button data-bs-dismiss="modal" aria-label="Close" type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-title="Cancel"><i class="fa-solid fa-times fs-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+    <script>
+        // Generate Image
+        $(document).ready(function () {
+            $("#frmStatement").submit(function (event) {
+                event.preventDefault();
+                if (!$(this).valid()) {
+                    return;
+                }
+                var form = $(this);
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                $("#loading").show();
+                $("#generateImage").attr("disabled", true);
+                $(".btnSave").attr("disabled", true);
+                $(".imgGen").addClass("opacity-50");
+                $.ajax({
+                    type: "POST",
+                    url: "/Statement/GenerateImage",
+                    data: form.serialize(),
+                    headers: { 'RequestVerificationToken': token },
+                    success: function (response) {
+                        if (response.success) {
+                           
+                            var imgGen = $(".imgGen").hide();
+                            imgGen.attr("src", response.imageUrl);
+                            imgGen.on("load", function () { 
+                                imgGen.removeClass("opacity-50");
+                                imgGen.fadeIn(1000);
+                                $("#loading").hide();
+                                $("#generateImage").attr("disabled", false);
+                                $(".btnSave").attr("disabled", false);
+                            });
+                            //imgGen.show();
+                            $("#savingUrl").val(response.imageUrl);
+                        }
+                        else {
+                            $("#loading").hide();
+                            $("#generateImage").attr("disabled", false);
+                            $(".imgGen").removeClass("opacity-50");
+                            console.log(response.message);
+                            $("#alertAjax").html(response.message);
+                            $("#alertAjax").show().delay(6000).fadeOut();
+                        }
+                    }
+                });
+            });
+            window.setTimeout(function () {
+                var alertASP = $("#alertASP");
+                alertASP.fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 6000);
+        });
+
+        // Save the statement
+        function saveStat() {
+            $("#pageLoading").show();
+            var form = $("#frmStatement");
+            $.ajax({
+                type: "POST",
+                url: "/Statement/Save",
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = "/Statement/Success";
+                    }
+                    else {
+                        console.log(response.message);
+                    }
+                }
+            });
+        }
+    </script>
+}

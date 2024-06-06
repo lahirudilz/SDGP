@@ -1,0 +1,24 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="error rounded-2 p-3 px-5 shadow col-12 col-md-5 text-light border border-1 border-light">
+    <div class="text-center py-2 text-warning">
+        <i class="fa-regular fa-circle-xmark" style="font-size: 100px;"></i>
+    </div>
+    <h1 class="text-center">Something went wrong...</h1>
+
+    <p class="text-center">An error occurred while processing your request.<br /> If the problem persists, please contact the site administrator.</p>
+    <p class="text-center"></p>
+    <hr />
+    <div class="text-center">
+        @if (Model.ShowRequestId)
+        {
+            <p>
+                <strong>Request ID:</strong> <code class="text-light">@Model.RequestId</code>
+            </p>
+        }
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary mt-2"><i class="fa-solid fa-arrow-left me-1"></i>Back to Home</a>
+    </div>
+</div>

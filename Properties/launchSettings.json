@@ -1,0 +1,53 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:26622",
+      "sslPort": 44396
+    }
+  },
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:4000",
+      "environmentVariables": {
+        "SendGridAPIKey": "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",
+        "OpenAiApiKey": "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",
+        "storageconnection": "DefaultEndpointsProtocol=https;AccountName=susfacegenlkstorage;AccountKey=OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==;BlobEndpoint=https://susfacegenlkstorage.blob.core.windows.net/;FileEndpoint=https://susfacegenlkstorage.file.core.windows.net/;TableEndpoint=https://susfacegenlkstorage.table.core.windows.net/;QueueEndpoint=https://susfacegenlkstorage.queue.core.windows.net/",
+        "storageaccount": "susfacegenlkstorage",
+        "storagekey": "OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7120;http://localhost:5223",
+      "environmentVariables": {
+        "SendGridAPIKey": "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",
+        "OpenAiApiKey": "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",
+        "storageconnection": "DefaultEndpointsProtocol=https;AccountName=susfacegenlkstorage;AccountKey=OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==;BlobEndpoint=https://susfacegenlkstorage.blob.core.windows.net/;FileEndpoint=https://susfacegenlkstorage.file.core.windows.net/;TableEndpoint=https://susfacegenlkstorage.table.core.windows.net/;QueueEndpoint=https://susfacegenlkstorage.queue.core.windows.net/",
+        "storageaccount": "susfacegenlkstorage",
+        "storagekey": "OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "SendGridAPIKey": "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",
+        "OpenAiApiKey": "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",
+        "storageconnection": "DefaultEndpointsProtocol=https;AccountName=susfacegenlkstorage;AccountKey=OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==;BlobEndpoint=https://susfacegenlkstorage.blob.core.windows.net/;FileEndpoint=https://susfacegenlkstorage.file.core.windows.net/;TableEndpoint=https://susfacegenlkstorage.table.core.windows.net/;QueueEndpoint=https://susfacegenlkstorage.queue.core.windows.net/",
+        "storageaccount": "susfacegenlkstorage",
+        "storagekey": "OGmp08gp/UGmwpTGoU+SCDpC6u6pbwabyLMcU1eKoRzwTxv9Oln+hukl/gDScMVaeLTgUV5YTDfo+AStsqhNlQ==",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

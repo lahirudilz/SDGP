@@ -1,0 +1,116 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["title"] = "Dashboard";
+    Layout = "~/Views/Admin/_Admin_Layout.cshtml";
+}
+
+<center>
+    <section class="contatiner content-section">
+        <div class="flex-container align-content-center justify-content-center">
+            <div class="container-item">
+                <span class="container-item-title"></span>
+                <p class="container-font">
+                    <i class="fa-solid fa-folder-open container-icon"></i>
+                </p>
+                <p id="caseCount" class="container-font number">
+                    
+                </p>
+                <p class="container-font text">
+                    Cases
+                </p>
+            </div>
+            <div class="container-item">
+                <span class="container-item-title"></span>
+                <p class="container-font">
+                    <i class="fas fa-images container-icon"></i>
+                </p>
+                <p id="imageCount" class="container-font number">
+                    
+                </p>
+                <p class="container-font text">
+                    Images Generated
+                </p>
+            </div>
+        </div>
+        <div class="flex-container align-content-center justify-content-center ">
+            <div class="container-item-small">
+                <table>
+                    <tr>
+                        <td rowspan="3">
+                            <p class="container-small-font icon-txt">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </p>
+                            <p class="container-font text1">
+                                See the users list
+                            </p>
+                            <p class="container-font text2">
+                                Navigate to list of users and manage users.
+                            </p>
+                        </td>
+                        <td class="button-row">
+                            <a href="@Url.Action("UserList", "Admin")">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr> <td></td></tr>
+                    <tr> <td></td></tr>
+                    <tr> <td></td></tr>
+                </table>
+                <span class="container-item-title"></span>
+            </div>
+            <div class="container-item-small">
+                <table>
+                    <tr>
+                        <td rowspan="3">
+                            <p class="container-small-font icon-txt">
+                                <i class="fa-regular fa-file"></i>
+                            </p>
+                            <p class="container-font text1">
+                                See the cases list
+                            </p>
+                            <p class="container-font text2">
+                                Navigate to list of cases and manage them.
+                            </p>
+                        </td>
+                        <td class="button-row">
+                            <a href="@Url.Action("CaseList", "Admin")">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr> <td></td></tr>
+                    <tr> <td></td></tr>
+                    <tr> <td></td></tr>
+                </table>
+                <span class="container-item-title"></span>
+            </div>
+        </div>
+    </section>
+</center>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Admin/GetCaseCount',
+                type: 'GET',
+                success: function (data) {
+                    $('#caseCount').text(data);
+                }
+            });
+
+            $.ajax({
+                url: '/Admin/GetImageCount',
+                type: 'GET',
+                success: function (data) {
+                    $('#imageCount').text(data);
+                }
+            });
+        });
+
+    </script>
+}

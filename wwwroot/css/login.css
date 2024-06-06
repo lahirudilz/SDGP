@@ -1,0 +1,83 @@
+﻿html, body{
+    min-width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url(../images/login_bg.webp);
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+#pageLoading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5) 50% 50% no-repeat;
+    z-index: 10000;
+}
+
+.logo{
+    background-image: linear-gradient(to top, #0f3b41, #27b095);
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+header nav, .inputs {
+    background-color: #1F2A37;
+}
+
+.inputs, .inputs input {
+    font-size: 14px;
+}
+
+.inputs input {
+    background-color: #4B5563;
+    color: white;
+    border: 1px solid #4B5563;
+}
+
+.inputs input:focus {
+    background-color: #4B5563;
+    color: white;
+    border: 1px solid #4B5563;
+}
+
+.inputs input::placeholder {
+    color: #9CA3AF;
+}
+
+.inputs input:focus::placeholder {
+    color: #9CA3AF;
+}
+
+.logo div{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 40px;
+}
+
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+footer {
+    background-color: #1F2A37;
+    color: white;
+    font-size: 14px;
+    line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+}
+
+

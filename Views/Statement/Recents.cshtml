@@ -1,0 +1,220 @@
+﻿@model IEnumerable<susFaceGen.Models.Case>
+
+@{
+    ViewData["Title"] = "Recents";
+}
+
+@if (Model == null || Model.Count() == 0)
+{
+    <div class="message rounded-2 p-3 px-5 shadow col-12 col-md-4 text-light border border-1 border-light">
+        <div class="text-center fs-3 fw-light mb-3">
+            No records found!
+        </div>
+        <div class="text-center">
+            <a class="btn btn-primary me-1" asp-action="Index" asp-controller="Home"><i class="fa-solid fa-arrow-left me-2"></i>Back to Home</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="bg-black p-2 rounded shadow position-relative">
+        <div class="position-absolute w-100">
+           @if (TempData["message"] != null)
+            {
+                <div class="alert alert-info alert-dismissible text-center mx-auto fade show col-md-4 col-12 z-3" role="alert">
+                    @TempData["message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
+        <div class="d-flex justify-content-between p-2">
+            <a class="btn btn-primary me-1" asp-action="Index" asp-controller="Home"><i class="fa-solid fa-arrow-left me-2"></i>Back to Home</a>
+            <form method="get" asp-action="Recents">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    <button type="submit" class="btn btn-outline-secondary me-2" id="button-addon2"><i class="fa fa-search"></i></button>
+                    <a class="btn btn-outline-light me-4" asp-action="Recents">Clear</a>
+                </div>
+            </form>
+        </div>
+        <div class="p-3 mt-2 rounded-3 bg-dark shadow-lg">
+            <div class="overflow-auto" style="height: 450px;">
+                <table class="table table-hover bg-dark text-light table-dark">
+                    <thead>
+                        <tr>
+                            <th>
+                                Case Ref No
+                            </th>
+                            <th>
+                                Officer ID
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Statements
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @c.CaseRefNum
+
+                                </td>
+                                <td>
+                                    @c.InvestigatingOfficerId
+                                </td>
+                                <td>
+                                    @c.Date
+                                </td>
+                                <td>
+                                    @c.CaseLocation
+                                </td>
+                                 <td>
+                                    <p class="text-wrap">@c.Description</p>
+                                </td>
+                                <td>
+                                    @if (c.Status == "Active")
+                                    {
+                                        <span class="badge bg-success">@c.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">@c.Status</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (c.StatementList.Count() > 0)
+                                    {
+                                        <table class="table table-info">
+                                            <thead>
+                                                <tr>
+                                                    <th>Eyewitness Name</th>
+                                                    <th>Eyewitness NIC</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var s in c.StatementList)
+                                                {
+                                                    <tr>
+                                                        <td>@s.EyewitnessName</td>
+                                                        <td>@s.EyewitnessNIC</td>
+                                                        <td>
+                                                            <button onclick="setImgSrc('@s.ImgUrl')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#imageModal">View Image</button>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+       
+    int currenetPage = (int) ViewData["page"];
+    int totalPages = (int) ViewData["totalPages"];
+
+    bool next = currenetPage == totalPages;
+    bool prev = currenetPage == 1;
+
+    
+    <nav aria-label="Page navigation" class="pt-2">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(prev ? "disabled" : "")">
+                <a class="page-link" asp-action="Recents" asp-route-page="@(currenetPage - 1)" >Previous</a>
+            </li>
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(currenetPage == i ? "active": "")">
+                    <a class="page-link" asp-action="Recents" asp-route-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(next ? "disabled" : "")">
+                <a class="page-link" asp-action="Recents" asp-route-page="@(currenetPage + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="imageLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content view-image">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="loading" class="text-center" style="display: none;">
+                        <div class="spinner-grow text-light mb-4" role="status" style="height: 5rem; width: 5rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <form id="frmDownload" method="post" asp-action="Download">
+                        <img id="suspectImg" src="" class="img-fluid bg-light rounded-circle"/>
+                        <input id="susUrl" name="url" hidden />
+                        <input id="filetype" name="filetype" hidden />
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center text-center border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="btn-group" role="group" aria-label="downloadBtn">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Download As
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item imgDownload" onclick="document.getElementById('filetype').value='jpg'; document.getElementById('frmDownload').submit()">JPEG</a></li>
+                            <li><a class="dropdown-item imgDownload" onclick="document.getElementById('filetype').value='png'; document.getElementById('frmDownload').submit()">PNG</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function setImgSrc(url) {
+            $("#suspectImg").hide();
+            $("#suspectImg").attr("src", url);
+            $("#loading").show();
+            $("#suspectImg").on("load", function () {
+                $("#loading").hide();
+                $("#suspectImg").fadeIn(1000);
+            });
+            $("#susUrl").val(url);
+        }
+        $(".imgDownload").click(function () {
+            setTimeout(function () {
+                $('#pageLoading').fadeOut();
+            }, 7000);
+
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+

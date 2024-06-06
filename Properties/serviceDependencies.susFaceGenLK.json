@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/susFaceGenLK/providers/Microsoft.ServiceLinker/linkers/ConnectionStringssusFaceGenContextConnec_FB81FEA810",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/susfacegenlkdbserver/databases/susFaceGen_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:susFaceGenContextConnection",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/susFaceGenLK/providers/Microsoft.ServiceLinker/linkers/storageconnection_61AE3C3118, /subscriptions/e4bf589d-482b-461b-88f1-cf2568353965/resourceGroups/susFaceGenResources/providers/Microsoft.Web/sites/susFaceGenLK/providers/Microsoft.ServiceLinker/linkers/storageconnection_466F54C613",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/susfacegenlkstorage",
+      "type": "storage.azure",
+      "connectionId": "storageconnection",
+      "dynamicId": null
+    }
+  }
+}

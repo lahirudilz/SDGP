@@ -1,0 +1,157 @@
+html {
+    font-size: 14px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+header {
+    min-height: 60px;
+}
+
+    header nav {
+        background-color: #1F2A37;
+    }
+
+
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/home_bg.webp);
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#pageLoading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5) 50% 50% no-repeat;
+    z-index: 10000;
+}
+
+.admin-bg {
+    background-image: url(../images/admin_bg.webp)
+}
+
+.home-details {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.register div {
+    background-color: #1F2A37;
+}
+
+.register, .register input {
+    font-size: 14px;
+}
+
+.register input, .register select, .generate, .generate input, .generate textarea, .generate select {
+    background-color: #4B5563;
+    color: white;
+    border: 1px solid #4B5563;
+}
+
+.generate select:focus, .generate input:focus, .generate textarea:focus {
+    background-color: #2b2c63;
+    color: white;
+    border: 1px solid #4B5563;
+}
+
+.register input:focus {
+    background-color: #4B5563;
+    color: white;
+    border: 1px solid #4B5563;
+}
+
+.register input::placeholder, .generate input::placeholder {
+    color: #9CA3AF;
+}
+
+.register input:focus::placeholder, .generate input:focus::placeholder {
+    color: #9CA3AF;
+}
+
+.generate h5 {
+    background-color: #1F2A37;
+}
+
+.generate input[type="date"] {
+    background-color: #4B5563;
+    color: ghostwhite;
+    border: 1px solid #4B5563;
+}
+
+.content {
+    min-height: calc(100vh - 120px);
+}
+
+
+.generate .image {
+    background-image: linear-gradient(to bottom right, #659cd0, #152957);
+    position: relative;
+}
+
+.generate .result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.generate .modal-content, .view-image {
+    background-image: linear-gradient(to bottom right, #2b2c63, #3d0165);
+}
+
+.success, .message, .error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #2b2c63, #3d0165);
+}
+
+footer {
+    background-color: #1F2A37;
+    color: white;
+    line-height: 60px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.about {
+    background-image: linear-gradient(to bottom right, #7B188C, #08258B);
+}
+
+.about .hero {
+    background-image: linear-gradient(to right, #091130, #0028B3);
+}
+
+    .about .hero h1 {
+        font-size: 3rem;
+    }
+
+.about p {
+    color: antiquewhite;
+}
+
+.about .team {
+    background-image: linear-gradient(to right, #091130, #4E0368);
+}

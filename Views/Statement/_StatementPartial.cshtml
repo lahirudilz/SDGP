@@ -1,0 +1,195 @@
+﻿@model susFaceGen.Models.Statement
+
+<h5 class="p-3 rounded-2 rounded-bottom-0 mb-0">
+    Statement Details
+</h5>
+<div class="details p-4 bg-dark">
+    <form id="frmStatement" method="post" asp-antiforgery="true">
+        <input asp-for="Id" hidden />
+        <input asp-for="_caseId" hidden/>
+        <input id="savingUrl" asp-for="ImgUrl" hidden/>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <select asp-for="Gender" class="form-select rounded-2">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Head Type</label>
+                    <select asp-for="TypeOfHead" asp-items="@Model.TypesOfHead" class="form-select rounded-2">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Color of Eyes</label>
+                    <select asp-for="ColorTypeOfEyes" asp-items="@Model.ColorTypesOfEyes" class="form-select rounded-2">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Shape of Eyes</label>
+                    <select asp-for="ShapeOfEyes" asp-items="@Model.ShapesOfEyes" class="form-select rounded-2">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Nose</label>
+                    <select class="form-select rounded-2" asp-for="Nose" asp-items="@Model.Noses">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Mouth</label>
+                    <select class="form-select rounded-2" asp-for="Mouth" asp-items="@Model.Mouths">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Teeth</label>
+                    <select class="form-select rounded-2" asp-for="Teeth" asp-items="@Model.Teeths">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Face</label>
+                    <select class="form-select rounded-2" asp-for="Face" asp-items="@Model.Faces">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Ears</label>
+                    <select class="form-select rounded-2" asp-for="Ears" asp-items="@Model.Earses">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Forehead</label>
+                    <select class="form-select rounded-2" asp-for="Forhead" asp-items="@Model.Forheads">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Chin</label>
+                    <select class="form-select rounded-2" asp-for="Chin" asp-items="@Model.Chins">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Hair on Head</label>
+                    <select class="form-select rounded-2" asp-for="HairOnHead" asp-items="@Model.HairOnHeads">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Facial Hair</label>
+                    <select class="form-select rounded-2" asp-for="FacialHair" asp-items="@Model.FacialHairs">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Color of Hair</label>
+                    <select asp-for="ColorOfHair" asp-items="Model.ColorsOfHair" class="form-select rounded-2">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Complexion</label>
+                    <select class="form-select rounded-2" asp-for="Complexion" asp-items="@Model.Complexions">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Eyebrows</label>
+                    <select class="form-select rounded-2" asp-for="EyeBrows" asp-items="@Model.EyeBrowses">
+                        <option value="" disabled selected>Select an option</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3 mx-auto">
+            <div class="form-group">
+                <label class="form-label">Age</label>
+                <input type="number" asp-for="Age" placeholder="Choose Age" class="form-control rounded-2" min="1" max="100" />
+            </div>
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label">Additional Details</label>
+            <textarea class="form-control" asp-for="AdditionalDetails" style="min-height:100px; max-height:100px;"></textarea>
+
+        </div>
+        <div class="row border-top border-secondary-subtle pt-4">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="EyewitnessName" class="form-label">Eyewitness's Name </label>
+                    <input class="form-control rounded-2" asp-for="EyewitnessName" placeholder="Enter the name" />
+                    <span asp-validation-for="EyewitnessName" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="EyewitnessNIC" class="form-label">Eyewitness's NIC</label>
+                    <input class="form-control rounded-2" asp-for="EyewitnessNIC" placeholder="Enter the nic" />
+                    <span asp-validation-for="EyewitnessNIC" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-inline-flex mt-2 justify-content-center w-100">
+            <div class="me-2"><button id="generateImage" type="submit" class="btn btn-lg btn-danger" disabled="@ViewData["GenerateSubmit"]">Generate</button></div>
+            <div class="ms-2"><button id="resetGenImg" type="reset" class="btn btn-lg btn-outline-secondary">Clear</button></div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

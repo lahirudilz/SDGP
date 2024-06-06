@@ -1,0 +1,91 @@
+﻿@model susFaceGen.Models.Case
+
+<h5 class="p-3 rounded-2 rounded-bottom-0 mb-0">
+    Case Details
+</h5>
+<div class="details p-4 bg-dark">
+    <div class="mb-5 col-md-6 mx-auto">
+        <form method="get" asp-action="SearchCase">
+            <div class="input-group">
+                <input class="form-control rounded-2 rounded-end-0" placeholder="Case reference no" name="query" />
+                <button type="submit" class="btn btn-primary" >Search</button>
+            </div>
+        </form>
+    </div>
+    <form method="post" asp-action="CaseDetails">
+        <input asp-for="Id" hidden />
+        <input asp-for="IsDeleted" value="N" hidden />
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Case Reference No</label>
+                    <input asp-for="CaseRefNum" class="form-control rounded-2" placeholder="Enter new case reference no" />
+                    <span asp-validation-for="CaseRefNum" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Case Location</label>
+                    <input asp-for="CaseLocation" class="form-control rounded-2" placeholder="Enter case location" />
+                    <span asp-validation-for="CaseLocation" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+
+                    @{
+
+                        DateOnly date = DateOnly.FromDateTime(DateTime.Now);
+
+                        if (Model.Date != DateOnly.MinValue)
+                        {
+                            date = Model.Date;
+                        }
+
+                    }
+
+                    <input asp-for="Date" class="form-control rounded-2" placeholder="Select the date" max="@DateTime.Now.ToString("yyyy-MM-dd")" value="@date.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="Date" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label class="form-label">Investigating Officer ID</label>
+                    <input asp-for="InvestigatingOfficerId" class="form-control rounded-2" placeholder="Enter the id" />
+                    <span asp-validation-for="InvestigatingOfficerId" class="text-warning" style="font-size: 14px;"></span>
+                </div>
+            </div>
+        </div>
+        <label class="form-label d-block">Case Status</label>
+        <div class="d-inline-flex mb-3">
+            <div class="form-check">
+                <input asp-for="Status" class="form-check-input" type="radio" value="Active" id="active" checked>
+                <label class="form-check-label" style="font-size:14px;" for="active">
+                    Active <br />
+                    <span class="text-secondary" style="font-size:13px;">Ongoing case</span>
+                </label>
+            </div>
+            <div class="form-check ms-4">
+                <input asp-for="Status" class="form-check-input" type="radio" value="Closed" id="inactive">
+                <label class="form-check-label" style="font-size:14px;" for="inactive">
+                    Inactive <br />
+                    <span class="text-secondary" style="font-size:13px;">Case is closed</span>
+                </label>
+            </div>
+            <span asp-validation-for="Status" class="text-warning" style="font-size: 14px;"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Case Description</label>
+            <textarea asp-for="Description" class="form-control" rows="5" style="min-height:100px; max-height:100px;"></textarea>
+            <span asp-validation-for="Description" class="text-warning" style="font-size: 14px;"></span>
+        </div>
+        <div class="d-inline-flex mt-2 justify-content-center w-100">
+            <div class="me-2"><button id="submitCase" type="submit" class="btn btn-danger">Submit</button></div>
+            <div class="ms-2"><button id="resetCase" type="reset" class="btn btn-outline-secondary">Clear</button></div>
+        </div>
+
+    </form>
+</div>
